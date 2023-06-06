@@ -23,14 +23,12 @@ namespace Tello.Controllers
         public ActionResult CreateTable([FromHeader]int userId, [FromBody] TableDto table)
         {
             var result = _tableService.Create(userId, table);
-
-
+            
             if(result == -1)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, ModelState);
             }
-
-            return Ok();
+            return Ok(result);
         }
 
 
@@ -38,15 +36,24 @@ namespace Tello.Controllers
         public ActionResult GetAll([FromHeader] int userId)
         {
             var result = _tableService.GetAll(userId);
-
             return Ok(result);
         }
 
+        [HttpGet("{tableid}")]
+        public ActionResult GetSingle([FromRoute] int tableid, [FromHeader] int userId) 
+        {
+            return Ok();
+        }
 
-
-
-
-
-
+        [HttpDelete("{tableid}")]
+        public ActionResult DeleteTable([FromRoute] int tableid, [FromHeader] int userId)
+        {
+            var result = _tableService.DeleteTable(tableid, userId);
+            if(result == -1)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ModelState);
+            }
+            return Ok();
+        }
     }
 }

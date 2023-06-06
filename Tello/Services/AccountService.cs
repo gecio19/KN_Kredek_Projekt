@@ -16,7 +16,6 @@ public class AccountService : IAccountService
         _passwordHasher = passwordHasher;
     }
 
-
     public void RegisterUser(RegisterUserDto dto)
     {
         var newUser = new User()
@@ -32,7 +31,6 @@ public class AccountService : IAccountService
         _context.Users.Add(newUser);
         _context.SaveChanges();
     }
-
 
     public int LoginUser(LoginDto dto)
     {

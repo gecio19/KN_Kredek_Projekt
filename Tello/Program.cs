@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Tello;
 using Tello.Entity;
 using Tello.Models;
@@ -14,7 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers()
-    .AddFluentValidation();
+    .AddFluentValidation()
+    .AddJsonOptions(x =>
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 
 
 builder.Services.AddDbContext<TelloDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("TelloDBContext")));
@@ -22,6 +26,7 @@ builder.Services.AddDbContext<TelloDbContext>(opt => opt.UseSqlServer(builder.Co
 
 builder.Services.AddScoped<IAccountService,AccountService>();
 builder.Services.AddScoped<ITableService,TableService>();
+builder.Services.AddScoped<ICardService, CardService>();
 
 //Haszowanie
 builder.Services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();

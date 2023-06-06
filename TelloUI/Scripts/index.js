@@ -72,13 +72,6 @@ function Login()
       "Password": password
     }
   ).then((response) => {
-
-
-  
-
-
-
-
       if(response.status == 400) // błąd
       {
         console.log("cos zle");
@@ -89,9 +82,9 @@ function Login()
         response.json().then(json => {
       
           console.log(json);
+
+          deleteAllCookies();
           document.cookie = json + "=User_Id";
-
-
         });
 
         window.location.href ="Workspace.html";
@@ -113,4 +106,16 @@ function Hide_Error()
 {
   var _error = document.getElementById("Error_Alert");
   _error.style.visibility = "hidden";
+}
+
+
+function deleteAllCookies() {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
 }

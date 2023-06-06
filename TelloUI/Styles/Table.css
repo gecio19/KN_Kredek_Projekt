@@ -1,0 +1,65 @@
+
+.scrumboard{
+   margin:0 auto;
+  display:inline-block;
+   
+}
+
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+h1{
+   margin-left:20px;
+   font-size:2rem;
+}
+
+
+
+
+
+ 
+ .portlet-header {
+   padding: 0.2em 0.3em;
+   margin-bottom: 0.5em;
+   position: relative;
+ }
+ .portlet-toggle {
+   position: absolute;
+   top: 50%;
+   right: 0;
+   margin-top: -8px;
+ }
+ .portlet-content {
+   padding: 0.4em;
+ }
+ .portlet-placeholder {
+   border: 1px dotted black;
+   margin: 0 1em 1em 0;
+   height: 50px;
+ }
+
+
+
+
+
+ .card
+ {
+ background-color: rgb(241, 242, 244)
+ }
+
+ .portlet 
+ {
+
+  border-radius: 25px;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  width: 250px;
+  margin: 5px;
+  height: 80px;
+
+ }
+

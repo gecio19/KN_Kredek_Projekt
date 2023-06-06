@@ -5,10 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/Workspace.css">
-
 </head>
 <body>
-    <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="#!">Start Bootstrap</a>
@@ -30,8 +28,7 @@
             </div>
         </div>
     </nav>
-    <!-- Header-->
-    <header class="bg-dark py-5">
+        <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Tello</h1>
@@ -42,11 +39,8 @@
     <!-- Section-->
     <section class="py-3">
         <div class="container px-3 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="TableContainer">
                
-
-                
-
                 <div class="col mb-5" onclick="Modal_POP()">
                     <div class="card h-100" >
                         <div class="card-body p-4">
@@ -54,41 +48,10 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">Utwórz nową tablice</h5>
                                 <!-- Product price-->
-                                
                             </div>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                
-                
-                <div class="col mb-5">
-                    <div class="card h-70">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
-                                <!-- Product price-->
-                                $40.00 - $80.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
                         </div>
                     </div>
                 </div>
-                
-              
-                
-              
-
-
-
-
-
-
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -99,36 +62,20 @@
         </div>
 
         <div class="modal-body">
-            
-            Jakies dane <br>
-            Jakies dane <br>
-            Jakies dane <br>
-            Jakies dane <br>
-            
-            
-            ...
-        
-        
+            <input id="Table_Name">
+            <button style="background-color: red; min-height: 2rem; min-width: 2rem;"></button>
+            <button style="background-color: green; min-height: 2rem; min-width: 2rem;"></button>
+            <button style="background-color: Blue; min-height: 2rem; min-width: 2rem;"></button>
+
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" onclick="Hide_Modal()">Close</button>
-          <button type="button" class="btn btn-primary">Add Table</button>
+          <button type="button" class="btn btn-primary" onclick="AddTable()">Add Table</button>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

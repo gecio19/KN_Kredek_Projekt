@@ -31,6 +31,24 @@ public class TableService : ITableService
         _dbContext.Tables.Add(_table);
         _dbContext.SaveChanges();
 
+        return _table.Id;
+    }
+
+    public int DeleteTable(int tableid, int userId)
+    {
+        var user = _dbContext
+          .Users
+          .Include(c => c.Tables)
+          .FirstOrDefault(u => u.Id == userId);
+
+        if (user is null) return -1;
+
+
+        var tablicka = _dbContext.Tables.FirstOrDefault(x => x.Id == tableid);
+        _dbContext.Tables.Remove(tablicka);
+        _dbContext.SaveChanges();
+
+
         return 1;
     }
 
@@ -51,12 +69,26 @@ public class TableService : ITableService
             TableDto _table = new TableDto();
             _table.Name = item.Name;
             _table.Theme = item.Theme;
-
+            _table.Id= item.Id;
             result.Add(_table);
         }
 
 
         return result;
+    }
+
+    public IEnumerable<Card> GetCards(int tableid , int userId)
+    {
+        var user = _dbContext
+         .Users
+         .Include(c => c.Tables)
+         .FirstOrDefault(u => u.Id == userId);
+
+        if (user is null) return new List<Card>();
+
+
+
+        throw new NotImplementedException();
     }
 }
 
@@ -66,6 +98,10 @@ public interface ITableService
     public int Create(int id, TableDto table);
 
     public IEnumerable<TableDto> GetAll(int id);
+
+    public IEnumerable<Card> GetCards(int tableid, int userId);
+
+    public int DeleteTable(int tableid, int userId);
 
 
 }
