@@ -5,10 +5,9 @@ const url_deleteTable = "https://localhost:7084/api/Workspace/";
 let number = "";
 
 document.onreadystatechange = function () {
-
     if (document.readyState == "complete") {
+      LoadTableTheme();
       LoadTables();
-
       var TableName = localStorage.getItem("ActualTable");
      document.querySelector("body > div > div.fixed-div > h2 > textarea").textContent = TableName;
     
@@ -200,8 +199,38 @@ async function getData(url = "", userId = "") {
     return response.json(); 
   } 
 
-
+  async function asynUpdateTableBack(url = "", tableId = "",data = "") {
+    const response = await fetch(url, {
+      method: "PUT", 
+      mode: "cors",
+      cache: "no-cache", 
+      credentials: "same-origin", 
+      headers: {
+        "Content-Type": "application/json",
+        "tableId": tableId,
+      },
+      redirect: "follow", 
+      referrerPolicy: "no-referrer", 
+      body: JSON.stringify(data), 
+    });
+    return response; 
+  } 
   
+  async function asyntableDetail(url = "", userId = "") {
+    const response = await fetch(url, {
+      method: "GET", 
+      mode: "cors",
+      cache: "no-cache", 
+      credentials: "same-origin", 
+      headers: {
+        "Content-Type": "application/json",
+        "userId": userId,
+      },
+      redirect: "follow", 
+      referrerPolicy: "no-referrer"
+    });
+    return response; 
+  } 
 
 
 //#endregion
@@ -504,6 +533,35 @@ function changeCardName(x)
 
 
 
+function LoadTableTheme()
+{
+        var _url = window.location.search.split("=");
+        var _tableId = _url[1];
+        var _cookies = document.cookie.split('=');
+        var _userId = _cookies[0];
+        let url_tableDetail = "https://localhost:7084/api/Workspace/";
+
+
+
+        asyntableDetail(url_tableDetail+_tableId, _userId)
+        .then((response) => response.json())
+        .then((json) => 
+        {
+          console.log(json.theme);
+
+          let url_getBlob = "https://localhost:7084/api/BlobStoreg/GetBlobFile";
+          let uri = "https://telloobiektowe.blob.core.windows.net/blobcontainertello/";
+          getDetail_Blob(url_getBlob,uri+json.theme)
+          .then((response) => response.blob())
+          .then((myBlob) => 
+                      {
+                      const objectURL = URL.createObjectURL(myBlob);
+                      
+                      $("#bodyBackGround").css("background-image", "url(" + objectURL + ")");
+      
+                      });
+        });
+}
 
 
 
@@ -543,9 +601,12 @@ var cardID = $(task).attr("id");
     $(TaskModalName).val(taskName);
     $(TaskModalName).attr("placeholder", taskName);
     $('#TaskModal').attr("cardId", cardID);
+
     //Pobranie des z bazy i wprowadzenie do Text Area
     const url_taskDetail = "https://localhost:7084/api/Card/TaskDetail";
     var oldName = $("#TaskModalName").attr("placeholder")
+
+    
     getDetail(url_taskDetail,cardID,
       {
         "oldName": oldName
@@ -564,5 +625,133 @@ function Hide_Modal_Task()
     $('#TaskModal').modal('hide');
     window.location.reload();
 }
+
+
+
+
+function ModalBackGround_POP()
+{
+  let modalchilds = document.getElementById("modal_background-body").children.length;
+  
+  if(modalchilds == 0)
+  {
+   BlobRepeat();
+  }
+
+
+
+
+  $('#BackgroundModal').modal('show');
+
+}
+
+
+
+
+function changeBackground(x)
+{
+var bg_source = x.src;
+
+const url_deleteTable = "https://localhost:7084/api/Workspace/UpdateTableTheme";
+
+var _url = window.location.search.split("=");
+var _tableId = _url[1];
+asynUpdateTableBack(url_deleteTable, _tableId, x.name);
+$("#bodyBackGround").css("background-image", "url(" + bg_source + ")");
+
+}
+
+
+
+
 //#endregion
 
+
+
+
+//#region  Blobs Operation
+
+
+async function getDetail_Blob(url = "", path = "") {
+  const response = await fetch(url, {
+    method: "GET", 
+    mode: "cors", 
+    cache: "no-cache", 
+    credentials: "same-origin", 
+    headers: {
+      "Content-Type": "application/json",
+      "path": path,
+    },
+    redirect: "follow", 
+    referrerPolicy: "no-referrer"
+  });
+  return response; 
+} 
+
+async function getAllBlobsNames(url = "") {
+  const response = await fetch(url, {
+    method: "GET", 
+    mode: "cors", 
+    cache: "no-cache", 
+    credentials: "same-origin", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow", 
+    referrerPolicy: "no-referrer"
+  });
+  return response; 
+} 
+
+
+
+function BlobRepeat()
+{
+const url_getBlobNames = "https://localhost:7084/api/BlobStoreg/ListBlobs";
+getAllBlobsNames(url_getBlobNames).then((response) => response.json())
+.then((myBlob) => {
+    myBlob.forEach(element => 
+        {
+          GetSingleBlob(element);
+        });
+});
+}
+
+
+
+function GetSingleBlob(name)
+{
+    const url_getBlob = "https://localhost:7084/api/BlobStoreg/GetBlobFile";
+    let uri = "https://telloobiektowe.blob.core.windows.net/blobcontainertello/";
+    getDetail_Blob(url_getBlob,uri+name)
+    .then((response) => response.blob())
+    .then((myBlob) => 
+                {
+                const objectURL = URL.createObjectURL(myBlob);
+
+                imgtemp = 
+                '<button type="submit" style="border: none; ">'+
+                '<img src="'+ objectURL+'" style="width: 15rem; height: 10rem;" alt="buttonpng" onclick="changeBackground(this)" name="'+ name + '" />'+
+              '</button>';
+
+                _imgtemp = '<img class="img" src="'+objectURL+'" >';
+
+                console.log(imgtemp);
+                var _body = $("#modal_background-body")[0];
+                $(_body).append(imgtemp);
+                });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#endregion

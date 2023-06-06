@@ -18,7 +18,6 @@ namespace Tello.Controllers
         }
 
 
-
         [HttpPost("NewTable")]
         public ActionResult CreateTable([FromHeader]int userId, [FromBody] TableDto table)
         {
@@ -42,7 +41,9 @@ namespace Tello.Controllers
         [HttpGet("{tableid}")]
         public ActionResult GetSingle([FromRoute] int tableid, [FromHeader] int userId) 
         {
-            return Ok();
+            var result = _tableService.GetSingle(tableid, userId);
+
+            return Ok(result);
         }
 
         [HttpDelete("{tableid}")]
@@ -55,5 +56,18 @@ namespace Tello.Controllers
             }
             return Ok();
         }
+
+        [HttpPut("UpdateTableTheme")]
+        public ActionResult UpdateTableTheme([FromHeader] int tableId, [FromBody] string newThemName)
+        {
+           var result = _tableService.UpdateTableTheme(tableId , newThemName);
+            return Ok(result);
+        }
+
+
+
+
+
+
     }
 }

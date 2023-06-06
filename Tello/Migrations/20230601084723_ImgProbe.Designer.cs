@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tello.Entity;
 
@@ -10,9 +11,11 @@ using Tello.Entity;
 namespace Tello.Migrations
 {
     [DbContext(typeof(TelloDbContext))]
-    partial class TelloDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601084723_ImgProbe")]
+    partial class ImgProbe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Tello.Entity;
 using Tello.Models;
 
@@ -77,6 +78,32 @@ public class TableService : ITableService
         return result;
     }
 
+    public TableDto GetSingle(int tableid, int userId)
+    {
+        var user = _dbContext
+          .Users
+          .Include(c => c.Tables)
+          .FirstOrDefault(u => u.Id == userId);
+
+        if (user is null) return new TableDto() ;
+        else
+        {
+            var tablicka = _dbContext.Tables.FirstOrDefault(x => x.Id == tableid);
+
+            TableDto result = new TableDto()
+            {
+                Name = tablicka.Name,
+                Theme = tablicka.Theme
+            };
+            return result;
+
+        }
+    }
+
+
+
+
+
     public IEnumerable<Card> GetCards(int tableid , int userId)
     {
         var user = _dbContext
@@ -90,12 +117,30 @@ public class TableService : ITableService
 
         throw new NotImplementedException();
     }
+
+   
+
+    public int UpdateTableTheme(int tableid, string themName)
+    {
+
+        var table = _dbContext
+         .Tables
+         .FirstOrDefault(u => u.Id == tableid);
+        if (table is null) return -1;
+
+        table.Theme = themName;
+
+        _dbContext.SaveChanges();
+
+        return 1;
+    }
 }
 
 
 public interface ITableService
 {
     public int Create(int id, TableDto table);
+    public TableDto GetSingle(int tableid, int userId);
 
     public IEnumerable<TableDto> GetAll(int id);
 
@@ -103,5 +148,6 @@ public interface ITableService
 
     public int DeleteTable(int tableid, int userId);
 
+    public int UpdateTableTheme(int tableid, string themName);
 
 }

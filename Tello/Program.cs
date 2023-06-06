@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
@@ -24,9 +25,15 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<TelloDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("TelloDBContext")));
 
 
+
 builder.Services.AddScoped<IAccountService,AccountService>();
 builder.Services.AddScoped<ITableService,TableService>();
 builder.Services.AddScoped<ICardService, CardService>();
+
+
+builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobConnectionString")));
+
+builder.Services.AddScoped<IBlobRepository, BlobRepository>();
 
 //Haszowanie
 builder.Services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();

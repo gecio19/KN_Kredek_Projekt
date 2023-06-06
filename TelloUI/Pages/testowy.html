@@ -20,49 +20,17 @@
 
     
 </head>
-<body>
-        <div>
-          <h2>Bootstrap 5: Horizontally scrolling cards with a "sticky" card</h2>
-        </div>
+<body id="bodyTest">
+    <h1>
+      Teścik
+    </h1>   
 
-  <div class="container-fluid py-2">
-    <div id="sortablelist" class="d-flex flex-row flex-nowrap">
+    <button type="button" class="btn btn-success" onclick="Test()">Success</button>
 
-          <div class="card column card-body m-2">
-            Szkoa
+    <img class="img">
 
 
 
-            
-            <div class="portlet">
-              <div class="portlet-header">Task</div>
-            </div>
-            
-            <div class="portlet">
-              <div class="portlet-header">Task</div>
-            </div>
-
-
-
-          </div>
-
-          
-
-          
-
-
-
-
-
-        <div class="card column card-body m-2">Pracka</div>
-        <div class="card column card-body m-2">Wioska</div>
-        <div class="card column card-body m-2">Wioska</div>
-        <div class="card column card-body m-2">Wioska</div>
-        <div class="card column card-body m-2">Wioska</div>
-        <div class="card column card-body m-2">Wisior</div>
-    </div>
-</div>
-    
 
 
 
@@ -70,43 +38,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
 <script src="../scripts/testowy.js"></script>
-
 </body>
 </html>
-
-<style>
-
-
-html::-webkit-scrollbar{
-  
-            border-radius: 8px;
-            background-color: #e7e7e7;
-            border: 1px solid #cacaca;
-
-
-
-}
-html::-webkit-scrollbar-thumb {
-            border-radius: 8px;
-          border: 3px solid transparent;
-           background-clip: content-box;
-            background-color: #d55959;
-        }
-
-
-.card-body {
-    min-height: 600px;
-    max-height: 600px;
-    min-width: 300px;
-    margin-right: 5px;
-}
-
-.sticky-card {
-	min-width: 400px;
-	max-width: 400;
-	z-index: 1;
-	position: sticky;
-	left: 0;
-} 
-
-</style>

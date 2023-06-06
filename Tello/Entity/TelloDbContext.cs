@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Tello.Models;
 
 namespace Tello.Entity
 {
@@ -30,5 +31,6 @@ namespace Tello.Entity
         public DbSet<Table> Tables { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Image> Images{ get; set; }
     }
 }

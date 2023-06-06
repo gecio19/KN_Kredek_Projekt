@@ -91,3 +91,7 @@ C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\Fl
 C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\libman.json
+C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\Azure.Storage.Blobs.dll
+C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\Azure.Storage.Common.dll
+C:\Users\Czesio\Desktop\ProgramowanieObiektowe-Projekt\Tello\bin\Debug\net6.0\System.IO.Hashing.dll

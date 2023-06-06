@@ -40,13 +40,43 @@ postData(url_addTable,
 
     
     Hide_Modal();
+
+
+
 }
 
 
 
+function NewTheme(fileName)
+{
+    console.log(fileName);
+    const url_Upload = "https://localhost:7084/api/BlobStoreg/UploadBlobFile";
+    postTheme(url_Upload,
+        {
+                "fileName": fileName
+        });
+
+}
 
 
+function LogOut()
+{
+    deleteAllCookies();
+    window.location = '/Pages/index.html';
 
+}
+
+
+function deleteAllCookies() {
+    const cookies = document.cookie.split(";");
+  
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  }
 
 
 
@@ -152,4 +182,22 @@ async function postData(url = "", userId = "", data = {}) {
       referrerPolicy: "no-referrer", 
     });
     return response.json(); 
+  }  
+
+
+
+  async function postTheme(url = "", data = {}) {
+    const response = await fetch(url, {
+      method: "POST", 
+      mode: "cors", 
+      cache: "no-cache", 
+      credentials: "same-origin", 
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: "follow", 
+      referrerPolicy: "no-referrer", 
+      body: JSON.stringify(data), 
+    });
+    return response; 
   }  
